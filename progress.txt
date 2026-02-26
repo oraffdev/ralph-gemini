@@ -9,6 +9,9 @@ Started: Thu Feb 26 23:11:22 UTC 2026
 - Pattern: Use keydown event listener to control the snake's direction.
 - Pattern: Always check the current direction before updating to prevent 180-degree reversals.
 - Pattern: Use `npx -y -p typescript tsc --project snake-game-js/tsconfig.json` for compilation if typescript is not locally installed.
+- Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
+- Pattern: Use a `Point` type for coordinates to ensure type safety.
+- Pattern: Always verify food placement against the snake's current positions to avoid unfair spawns.
 
 ---
 
@@ -46,4 +49,17 @@ Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
   - Pattern: Keydown events are used for controls.
   - Gotcha: Must check the current direction before updating to prevent reversing.
   - Context: ArrowUp/Down/Left/Right are the supported keys.
+---
+
+## Thu Feb 26 23:43:00 UTC 2026 - US-004
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação de sistema de comida e pontuação.
+- Lógica de crescimento da cobra ao comer.
+- Geração aleatória de comida sem sobreposição à cobra.
+- Atualização do Score no DOM.
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/AGENTS.md, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
+  - Pattern: Always check food placement against the snake's current positions.
+  - Context: Use Point type for cleaner coordinate handling.
 ---

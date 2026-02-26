@@ -9,6 +9,9 @@ const CANVAS_SIZE = 400;
 let lastTime = 0;
 const FPS = 10;
 const frameDelay = 1000 / FPS;
+// Game state
+let score = 0;
+let food = { x: 5, y: 5 };
 // Snake state
 let snake = [
     { x: 10, y: 10 },
@@ -16,6 +19,21 @@ let snake = [
     { x: 8, y: 10 }
 ];
 let direction = { x: 1, y: 0 };
+function generateFood() {
+    const maxGrid = CANVAS_SIZE / GRID_SIZE;
+    let newFood;
+    // Ensure food doesn't spawn on top of the snake
+    while (true) {
+        newFood = {
+            x: Math.floor(Math.random() * maxGrid),
+            y: Math.floor(Math.random() * maxGrid)
+        };
+        const onSnake = snake.some(segment => segment.x === newFood.x && segment.y === newFood.y);
+        if (!onSnake)
+            break;
+    }
+    food = newFood;
+}
 // Control the snake's direction
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
@@ -43,11 +61,23 @@ function clearCanvas() {
 }
 function update() {
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
-    snake.unshift(head);
-    snake.pop();
+    // Check if snake eats food
+    if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        scoreElement.textContent = `Score: ${score}`;
+        snake.unshift(head); // Add new head without removing tail
+        generateFood();
+    }
+    else {
+        snake.unshift(head);
+        snake.pop();
+    }
 }
 function draw() {
     clearCanvas();
+    // Draw food
+    ctx.fillStyle = "red";
+    ctx.fillRect(food.x * GRID_SIZE, food.y * GRID_SIZE, GRID_SIZE - 1, GRID_SIZE - 1);
     // Draw snake
     ctx.fillStyle = "lime";
     snake.forEach(segment => {
@@ -64,6 +94,8 @@ function gameLoop(currentTime) {
     update();
     draw();
 }
+// Initial food placement
+generateFood();
 // Start the loop
 requestAnimationFrame(gameLoop);
 console.log("Snake Game Loop Started");
