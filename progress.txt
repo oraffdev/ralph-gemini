@@ -1,0 +1,16 @@
+# Ralph Progress Log
+Started: Thu Feb 26 23:11:22 UTC 2026
+---
+
+## Thu Feb 26 23:23:09 UTC 2026 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Configuração inicial do Canvas HTML5 e loop de jogo.
+- Estilização básica para centralização e fundo preto.
+- Implementação de game loop com controle de FPS usando requestAnimationFrame.
+- Configuração de TypeScript para verificação de tipos e compilação para Vanilla JS.
+- Files changed: snake-game-js/index.html, snake-game-js/style.css, snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/tsconfig.json, snake-game-js/AGENTS.md, prd.json
+- **Learnings for future iterations:**
+  - Pattern: Use 'files' property in tsconfig.json to specify entry points to avoid configuration conflicts.
+  - Pattern: FPS control in requestAnimationFrame is essential for a game like Snake.
+  - Context: The main entry point is snake-game-js/main.ts which compiles to main.js.
+---
