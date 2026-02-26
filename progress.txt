@@ -1,5 +1,12 @@
 # Ralph Progress Log
 Started: Thu Feb 26 23:11:22 UTC 2026
+
+## Codebase Patterns
+- Pattern: Use 'files' property in tsconfig.json to specify entry points to avoid configuration conflicts.
+- Pattern: FPS control in requestAnimationFrame is essential for a game like Snake.
+- Pattern: Main game logic is in snake-game-js/main.ts, which is compiled to main.js.
+- Pattern: Canvas size is 400x400 with a 20x20 GRID_SIZE.
+
 ---
 
 ## Thu Feb 26 23:23:09 UTC 2026 - US-001
@@ -13,4 +20,16 @@ Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
   - Pattern: Use 'files' property in tsconfig.json to specify entry points to avoid configuration conflicts.
   - Pattern: FPS control in requestAnimationFrame is essential for a game like Snake.
   - Context: The main entry point is snake-game-js/main.ts which compiles to main.js.
+---
+
+## Thu Feb 26 23:24:23 UTC 2026 - US-002
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação da representação da cobra como um array de coordenadas {x, y}.
+- Adição da lógica de movimento automático da cobra em uma direção inicial.
+- Implementação de renderização da cobra alinhada ao sistema de grade (20x20 pixels).
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: The snake's head is always the first element (index 0) of the 'snake' array.
+  - Pattern: Movement is achieved by calculating a new head position and using 'unshift' (add head) and 'pop' (remove tail).
+  - Context: Current direction is stored as {x, y} offsets, where (1, 0) is right, (-1, 0) is left, (0, 1) is down, and (0, -1) is up.
 ---

@@ -11,18 +11,38 @@ let lastTime = 0;
 const FPS = 10;
 const frameDelay = 1000 / FPS;
 
+// Snake state
+let snake = [
+    { x: 10, y: 10 },
+    { x: 9, y: 10 },
+    { x: 8, y: 10 }
+];
+let direction = { x: 1, y: 0 };
+
 function clearCanvas() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 
 function update() {
-    // Current story doesn't require update logic yet, just the loop
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    snake.unshift(head);
+    snake.pop();
 }
 
 function draw() {
     clearCanvas();
-    // Current story doesn't require drawing game objects yet, just clearing
+
+    // Draw snake
+    ctx.fillStyle = "lime";
+    snake.forEach(segment => {
+        ctx.fillRect(
+            segment.x * GRID_SIZE,
+            segment.y * GRID_SIZE,
+            GRID_SIZE - 1,
+            GRID_SIZE - 1
+        );
+    });
 }
 
 function gameLoop(currentTime: number) {
