@@ -10,3 +10,8 @@
 - Grid size is 20x20.
 - Game loop uses `requestAnimationFrame` with a fixed FPS control (currently 10 FPS).
 - Main game script is `main.js`, which is compiled from `main.ts`.
+
+## Learnings & Patterns
+- The snake's direction is controlled by keyboard arrow keys (ArrowUp, ArrowDown, ArrowLeft, ArrowRight).
+- Direction changes are restricted to prevent 180-degree turns (e.g., cannot go directly from left to right) to prevent the snake from eating itself instantly.
+- Always use `npx -y -p typescript tsc --project snake-game-js/tsconfig.json` to compile if typescript is not locally installed.
