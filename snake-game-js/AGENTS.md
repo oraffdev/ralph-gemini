@@ -18,3 +18,6 @@
 - **Snake Growth:** Achieving snake growth is done by calculating a new head position and using `unshift` to add it, while only using `pop` (removing the tail) if the snake *doesn't* eat food in that frame.
 - **Food Placement:** When generating food, always verify that the new position doesn't overlap with any segment of the snake to avoid unfair spawns.
 - **UI Update:** Use `textContent` to update the score element in the DOM to avoid unnecessary HTML parsing.
+- **Collision Detection:** Check for boundary violations (coordinates < 0 or >= maxGrid) and self-collision (new head position overlaps with any existing segment) in the `update()` function.
+- **Game Over Handling:** Use a `gameOver` flag to stop game logic updates and render a semi-transparent overlay with a "Game Over" message on the canvas.
+- **Restart Mechanism:** Implement a way to reload the game state when the game is over, such as using `location.reload()` when the user presses a specific key (e.g., Space or Enter).

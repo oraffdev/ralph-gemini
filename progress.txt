@@ -12,6 +12,9 @@ Started: Thu Feb 26 23:11:22 UTC 2026
 - Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
 - Pattern: Use a `Point` type for coordinates to ensure type safety.
 - Pattern: Always verify food placement against the snake's current positions to avoid unfair spawns.
+- Pattern: Check for boundary and self-collision in the 'update' function before updating the snake's position.
+- Pattern: Use a semi-transparent overlay in 'draw' to show a Game Over screen without clearing the final game state.
+- Pattern: Restart the game using `location.reload()` when Space/Enter is pressed after Game Over.
 
 ---
 
@@ -62,4 +65,16 @@ Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
   - Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
   - Pattern: Always check food placement against the snake's current positions.
   - Context: Use Point type for cleaner coordinate handling.
+---
+
+## Thu Feb 26 23:42:17 UTC 2026 - US-005
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação de detecção de colisão com as bordas do canvas e com o próprio corpo.
+- Adição de estado de Game Over e exibição de mensagem na tela.
+- Mecanismo de reinício do jogo ao pressionar Espaço ou Enter.
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/AGENTS.md, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: Check for boundary and self-collision in the 'update' function before updating the snake's position.
+  - Pattern: Use a semi-transparent overlay in 'draw' to show a Game Over screen without clearing the final game state.
+  - Gotcha: Remember to handle the 'gameOver' state in the event listeners to prevent unintended movements or to enable restart logic.
 ---

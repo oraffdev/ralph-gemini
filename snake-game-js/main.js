@@ -12,6 +12,7 @@ const frameDelay = 1000 / FPS;
 // Game state
 let score = 0;
 let food = { x: 5, y: 5 };
+let gameOver = false;
 // Snake state
 let snake = [
     { x: 10, y: 10 },
@@ -36,6 +37,12 @@ function generateFood() {
 }
 // Control the snake's direction
 window.addEventListener("keydown", (event) => {
+    if (gameOver) {
+        if (event.key === "Enter" || event.key === " ") {
+            location.reload();
+        }
+        return;
+    }
     switch (event.key) {
         case "ArrowUp":
             if (direction.y === 0)
@@ -60,7 +67,20 @@ function clearCanvas() {
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 function update() {
+    if (gameOver)
+        return;
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    // Check collision with walls
+    const maxGrid = CANVAS_SIZE / GRID_SIZE;
+    if (head.x < 0 || head.x >= maxGrid || head.y < 0 || head.y >= maxGrid) {
+        gameOver = true;
+        return;
+    }
+    // Check collision with self
+    if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+        gameOver = true;
+        return;
+    }
     // Check if snake eats food
     if (head.x === food.x && head.y === food.y) {
         score += 10;
@@ -83,6 +103,16 @@ function draw() {
     snake.forEach(segment => {
         ctx.fillRect(segment.x * GRID_SIZE, segment.y * GRID_SIZE, GRID_SIZE - 1, GRID_SIZE - 1);
     });
+    if (gameOver) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
+        ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        ctx.fillStyle = "white";
+        ctx.font = "40px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("GAME OVER", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+        ctx.font = "20px Arial";
+        ctx.fillText("Press SPACE to Restart", CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 50);
+    }
 }
 function gameLoop(currentTime) {
     requestAnimationFrame(gameLoop);
