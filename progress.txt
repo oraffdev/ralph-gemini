@@ -1,0 +1,80 @@
+# Ralph Progress Log
+Started: Thu Feb 26 23:11:22 UTC 2026
+
+## Codebase Patterns
+- Pattern: Use 'files' property in tsconfig.json to specify entry points to avoid configuration conflicts.
+- Pattern: FPS control in requestAnimationFrame is essential for a game like Snake.
+- Pattern: Main game logic is in snake-game-js/main.ts, which is compiled to main.js.
+- Pattern: Canvas size is 400x400 with a 20x20 GRID_SIZE.
+- Pattern: Use keydown event listener to control the snake's direction.
+- Pattern: Always check the current direction before updating to prevent 180-degree reversals.
+- Pattern: Use `npx -y -p typescript tsc --project snake-game-js/tsconfig.json` for compilation if typescript is not locally installed.
+- Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
+- Pattern: Use a `Point` type for coordinates to ensure type safety.
+- Pattern: Always verify food placement against the snake's current positions to avoid unfair spawns.
+- Pattern: Check for boundary and self-collision in the 'update' function before updating the snake's position.
+- Pattern: Use a semi-transparent overlay in 'draw' to show a Game Over screen without clearing the final game state.
+- Pattern: Restart the game using `location.reload()` when Space/Enter is pressed after Game Over.
+
+---
+
+## Thu Feb 26 23:23:09 UTC 2026 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Configuração inicial do Canvas HTML5 e loop de jogo.
+- Estilização básica para centralização e fundo preto.
+- Implementação de game loop com controle de FPS usando requestAnimationFrame.
+- Configuração de TypeScript para verificação de tipos e compilação para Vanilla JS.
+- Files changed: snake-game-js/index.html, snake-game-js/style.css, snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/tsconfig.json, snake-game-js/AGENTS.md, prd.json
+- **Learnings for future iterations:**
+  - Pattern: Use 'files' property in tsconfig.json to specify entry points to avoid configuration conflicts.
+  - Pattern: FPS control in requestAnimationFrame is essential for a game like Snake.
+  - Context: The main entry point is snake-game-js/main.ts which compiles to main.js.
+---
+
+## Thu Feb 26 23:24:23 UTC 2026 - US-002
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação da representação da cobra como um array de coordenadas {x, y}.
+- Adição da lógica de movimento automático da cobra em uma direção inicial.
+- Implementação de renderização da cobra alinhada ao sistema de grade (20x20 pixels).
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: The snake's head is always the first element (index 0) of the 'snake' array.
+  - Pattern: Movement is achieved by calculating a new head position and using 'unshift' (add head) and 'pop' (remove tail).
+  - Context: Current direction is stored as {x, y} offsets, where (1, 0) is right, (-1, 0) is left, (0, 1) is down, and (0, -1) is up.
+---
+
+## Thu Feb 26 23:37:56 UTC 2026 - US-003
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação de controles de teclado para a cobra.
+- Adição de lógica para impedir inversão de 180 graus na direção.
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/AGENTS.md, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: Keydown events are used for controls.
+  - Gotcha: Must check the current direction before updating to prevent reversing.
+  - Context: ArrowUp/Down/Left/Right are the supported keys.
+---
+
+## Thu Feb 26 23:43:00 UTC 2026 - US-004
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação de sistema de comida e pontuação.
+- Lógica de crescimento da cobra ao comer.
+- Geração aleatória de comida sem sobreposição à cobra.
+- Atualização do Score no DOM.
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/AGENTS.md, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: Snake growth is achieved by omitting the 'pop' operation during a frame where food is eaten.
+  - Pattern: Always check food placement against the snake's current positions.
+  - Context: Use Point type for cleaner coordinate handling.
+---
+
+## Thu Feb 26 23:42:17 UTC 2026 - US-005
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implementação de detecção de colisão com as bordas do canvas e com o próprio corpo.
+- Adição de estado de Game Over e exibição de mensagem na tela.
+- Mecanismo de reinício do jogo ao pressionar Espaço ou Enter.
+- Files changed: snake-game-js/main.ts, snake-game-js/main.js, snake-game-js/AGENTS.md, prd.json, progress.txt
+- **Learnings for future iterations:**
+  - Pattern: Check for boundary and self-collision in the 'update' function before updating the snake's position.
+  - Pattern: Use a semi-transparent overlay in 'draw' to show a Game Over screen without clearing the final game state.
+  - Gotcha: Remember to handle the 'gameOver' state in the event listeners to prevent unintended movements or to enable restart logic.
+---
